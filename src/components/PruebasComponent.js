@@ -4,6 +4,7 @@ export const PruebasComponent = () => {
   
   const [usuario, setUsuario] = useState("Alejandro Sáez")
   const [fecha, setFecha] = useState("01-01-1999, 00:00:01")
+  const [contador, setContador] = useState(0)
   
   const modUsuario = (e) => {
 
@@ -26,19 +27,19 @@ export const PruebasComponent = () => {
 
   // Se ejecuta solo al cambiar el nombre
   useEffect(() => {
-    console.log("Has modificado el usuario !!")
-  }, [usuario])
+    console.log("Has modificado el usuario: "+contador)
+    setContador(contador+1)
+  }, [usuario,fecha])
 
   // Se ejecuta solo al cambiar la fecha
   useEffect(() => {
-    console.log("Has modificado la fecha !!")
   }, [fecha])
 
   return (
     <div>
       <h1>El efecto - Hook useEffect</h1>
       
-      <strong className='label'>{usuario}</strong>
+      <strong className={ contador <= 10 ? 'label' : 'label label-green' }>{usuario}</strong>
       <strong className='label label-green'>{fecha}</strong>
       <p>
         <input
@@ -55,6 +56,7 @@ export const PruebasComponent = () => {
         </button>
       </p>
       
+      { contador >= 20 && "Hemos superado el 20 en el contador"}
       
     </div>
   )
