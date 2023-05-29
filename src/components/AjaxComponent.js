@@ -28,8 +28,22 @@ export const AjaxComponent = () => {
     ])
   }
 
+  const getUsuariosAjaxPms = () => {
+    fetch("https://reqres.in/api/users?page=1")
+      .then(respuesta => respuesta.json())
+      .then(
+        resultado_final => {
+          setUsuarios(resultado_final.data)
+          console.log(usuarios)
+        },
+        error => {
+          console.log(error)
+        }        
+      )
+  }
+
   useEffect(() => {
-    getUsuariosEstaticos();
+    getUsuariosAjaxPms();
   }, [])
 
   return (
@@ -39,7 +53,7 @@ export const AjaxComponent = () => {
         {
           usuarios.map(usuario => {
             console.log(usuario);
-            return <li key={usuario.id}>{usuario.first_name}{usuario.last_name}</li>
+            return <li key={usuario.id}>{usuario.first_name} {usuario.last_name}</li>
           })
         }
       </ol>
